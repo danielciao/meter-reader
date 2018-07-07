@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout should render Page correctly 1`] = `
+<div
+  className="sc-bdVaJa cdirPa"
+/>
+`;
+
+exports[`Layout should render Section correctly 1`] = `
+<section
+  className="sc-bwzfXH bzRVtw"
+/>
+`;

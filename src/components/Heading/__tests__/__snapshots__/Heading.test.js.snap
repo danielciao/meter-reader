@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Heading should render h1 correctly 1`] = `
+<h1
+  className="sc-bdVaJa Egqup"
+>
+  This is a heading
+</h1>
+`;
+
+exports[`Heading should render h2 correctly 1`] = `
+<h1
+  className="sc-bwzfXH lhwasE"
+>
+  This is a heading
+</h1>
+`;

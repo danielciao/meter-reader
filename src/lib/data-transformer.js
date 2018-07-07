@@ -1,17 +1,18 @@
-function toMonthlyReading(data) {
+function toMonthlyUsage(data = { electricity: [] }) {
   const meterReadings = data.electricity;
-
   const energyUsageData = [];
-  for (let i = 0; i < meterReadings.length - 2; i++) {
-    const energyUsage = meterReadings[i + 1].cumulative - meterReadings[i].cumulative;
+
+  for (let i = 0; i < meterReadings.length - 1; i += 1) {
+    const { cumulative, readingDate: date, unit } = meterReadings[i + 1];
+
     energyUsageData.push({
-      date: meterReadings[i + 1].readingDate,
-      energyUsage,
-      unit: meterReadings[i].unit
+      date,
+      unit,
+      energyUsage: cumulative - meterReadings[i].cumulative
     });
   }
 
   return energyUsageData;
 }
 
-export { toMonthlyReading };
+export { toMonthlyUsage };

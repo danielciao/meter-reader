@@ -1,7 +1,8 @@
 module.exports = {
   extends: ['airbnb', 'prettier'],
   env: {
-    browser: true
+    browser: true,
+    jest: true
   },
   rules: {
     'import/no-extraneous-dependencies': 0,

@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table should render Table correctly 1`] = `
+<table
+  className="sc-bdVaJa hPLTEz"
+>
+  <thead
+    className="sc-bwzfXH hphvth"
+  >
+    <tr
+      className="sc-ifAKCX hNBzmR"
+    >
+      <th
+        className="sc-EHOje fzCMNg"
+      >
+        Account Name
+      </th>
+      <th
+        className="sc-EHOje fzCMNg"
+      >
+        Account Type
+      </th>
+      <th
+        className="sc-EHOje fzCMNg"
+      >
+        Balance
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    className="sc-htpNat KtFsv"
+  >
+    <tr
+      className="sc-ifAKCX hNBzmR"
+    >
+      <td
+        className="sc-bZQynM laqJsW"
+      >
+        Monthly Budget
+      </td>
+      <td
+        className="sc-bZQynM laqJsW"
+      >
+        Current
+      </td>
+      <td
+        className="sc-bZQynM laqJsW"
+      >
+        350
+      </td>
+    </tr>
+    <tr
+      className="sc-ifAKCX hNBzmR"
+    >
+      <td
+        className="sc-bZQynM laqJsW"
+      >
+        Holiday Fund
+      </td>
+      <td
+        className="sc-bZQynM laqJsW"
+      >
+        Savings
+      </td>
+      <td
+        className="sc-bZQynM laqJsW"
+      >
+        1800
+      </td>
+    </tr>
+  </tbody>
+  <caption
+    className="sc-bxivhb jGGQlA"
+  >
+    * Your account summary.
+  </caption>
+</table>
+`;
