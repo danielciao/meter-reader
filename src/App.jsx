@@ -7,7 +7,7 @@ import { H1, H2 } from './components/Heading';
 import { Page, Section } from './components/Layout';
 import BulbBarChart from './components/BulbBarChart';
 import Table, { TableHeader, TableBody, TableCaption, TableRow, CellHeader, CellData } from './components/Table';
-import { toFormattedDate } from './lib/formatter';
+import { toFormattedDate, toFormattedDecimal } from './lib/formatter';
 
 // global styles
 // eslint-disable-next-line no-unused-expressions
@@ -30,12 +30,13 @@ export default function App({ data }) {
     return <Page>Loading...</Page>;
   }
 
+  const { actual, interpolated } = data;
   return (
     <Page>
       <H1>Your monthly summary</H1>
       <Section>
         <H2>Engergy Usage</H2>
-        <BulbBarChart data={data} />
+        <BulbBarChart data={actual} />
       </Section>
       <Section>
         <H2>Meter Readings</H2>
@@ -48,7 +49,7 @@ export default function App({ data }) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map(({ date, energyUsage, unit }) => (
+            {actual.map(({ date, energyUsage, unit }) => (
               <TableRow key={date}>
                 <CellData>{toFormattedDate(date)}</CellData>
                 <CellData>{energyUsage}</CellData>
@@ -57,6 +58,32 @@ export default function App({ data }) {
             ))}
           </TableBody>
           <TableCaption>* Orginal reading as provided by customer.</TableCaption>
+        </Table>
+      </Section>
+      <Section>
+        <H2>Estimated Usage</H2>
+        <BulbBarChart data={interpolated} />
+      </Section>
+      <Section>
+        <H2>Estimated Month End Usage</H2>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <CellHeader>Date</CellHeader>
+              <CellHeader>Estimated Usage</CellHeader>
+              <CellHeader>Unit</CellHeader>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {interpolated.map(({ date, energyUsage, unit }) => (
+              <TableRow key={date}>
+                <CellData>{toFormattedDate(date)}</CellData>
+                <CellData>{toFormattedDecimal(energyUsage)}</CellData>
+                <CellData>{unit}</CellData>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableCaption>* There are interpolated values from orginal readings.</TableCaption>
         </Table>
       </Section>
     </Page>

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import App from './App';
 
 import { getReadings } from './services/meter-reader-service';
-import { toMonthlyUsage } from './lib/data-transformer';
+import { toMonthlyUsage, toInterpolatedMonthlyUsage } from './lib/data-transformer';
 
 export default class AppContainer extends PureComponent {
   constructor(props) {
@@ -17,7 +17,10 @@ export default class AppContainer extends PureComponent {
     getReadings().then(readings => {
       if (!readings.err) {
         this.setState({
-          data: toMonthlyUsage(readings)
+          data: {
+            actual: toMonthlyUsage(readings),
+            interpolated: toInterpolatedMonthlyUsage(readings)
+          }
         });
       }
     });
