@@ -16,7 +16,7 @@ const TEST_DATA = {
     },
     {
       cumulative: 18002,
-      readingDate: '2017-05-08T00:00:00.000Z',
+      readingDate: '2017-05-31T00:00:00.000Z',
       unit: 'kWh'
     }
   ]
@@ -65,33 +65,35 @@ describe('Data Transformer', () => {
       const { electricity } = TEST_DATA;
       const result = toInterpolatedMonthlyUsage(TEST_DATA);
 
-      expect(result.length).toEqual(2);
+      expect(result.length).toEqual(3);
+      expect(result[0]).toHaveProperty('energyUsage');
+      expect(result[0]).toHaveProperty('unit', electricity[0].unit);
+
       expect(result[0]).toHaveProperty(
         'date',
         moment(electricity[0].readingDate)
           .endOf('month')
           .toISOString()
       );
-      expect(result[0]).toHaveProperty('energyUsage');
-      expect(result[0]).toHaveProperty('unit', electricity[0].unit);
-
       expect(result[1]).toHaveProperty(
         'date',
         moment(electricity[1].readingDate)
           .endOf('month')
           .toISOString()
       );
+      expect(result[2]).toHaveProperty('date', moment(electricity[2].readingDate).toISOString());
     });
 
     it('should calculate the interpolated monthly usage correctly', () => {
       const { electricity } = TEST_DATA;
-      const [result1, result2] = toInterpolatedMonthlyUsage(TEST_DATA);
+      const [result1, result2, result3] = toInterpolatedMonthlyUsage(TEST_DATA);
 
       const expected1 = manualCalculation(electricity[0], electricity[1]);
       const expected2 = manualCalculation(electricity[1], electricity[2]);
 
       expect(result1.energyUsage).toEqual(expected1.beforeMonthEnding);
       expect(result2.energyUsage).toEqual(expected1.afterMonthEnding + expected2.beforeMonthEnding);
+      expect(result3.energyUsage).toEqual(expected2.afterMonthEnding);
     });
 
     it('should handle invalid input', () => {

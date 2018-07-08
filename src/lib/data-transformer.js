@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { getDiffInDays, getDaysUntilMonthEnd } from './date-utils';
+import { isEndOfMonth, getDiffInDays, getDaysUntilMonthEnd } from './date-utils';
 
 function interpolateUsage(usage1, usage2) {
   const meterUsage = usage2.cumulative - usage1.cumulative;
@@ -48,6 +48,22 @@ function toInterpolatedMonthlyUsage(data = { electricity: [] }) {
 
     // eslint-disable-next-line prefer-destructuring
     afterMonthEnding = interpolated.afterMonthEnding;
+  }
+
+  // Add last reading if it happens on the month end
+  if (meterReadings.length >= 2) {
+    const [secondToLast] = meterReadings.slice(-2);
+    const [last] = meterReadings.slice(-1);
+
+    if (isEndOfMonth(last.readingDate)) {
+      const interpolated = interpolateUsage(secondToLast, last);
+
+      energyUsageData.push({
+        unit: last.unit,
+        date: moment(last.readingDate).toISOString(),
+        energyUsage: interpolated.afterMonthEnding
+      });
+    }
   }
 
   return energyUsageData;

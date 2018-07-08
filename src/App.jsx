@@ -83,7 +83,7 @@ export default function App({ data }) {
               </TableRow>
             ))}
           </TableBody>
-          <TableCaption>* There are interpolated values from orginal readings.</TableCaption>
+          <TableCaption>* These are interpolated values from orginal readings.</TableCaption>
         </Table>
       </Section>
     </Page>
