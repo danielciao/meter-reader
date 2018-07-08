@@ -9,9 +9,9 @@ exports[`Heading should render h1 correctly 1`] = `
 `;
 
 exports[`Heading should render h2 correctly 1`] = `
-<h1
+<h2
   className="sc-bwzfXH lhwasE"
 >
   This is a heading
-</h1>
+</h2>
 `;
